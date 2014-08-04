@@ -117,7 +117,7 @@ BOOL CWinAppEx::PostInstanceMessage( WPARAM wParam, LPARAM lParam )
 		
 	// Send the message to all other instances.
 	// If the function succeeds, the return value is a positive value.
-	// If the function is unable to broadcast the message, the return value is –1.
+	// If the function is unable to broadcast the message, the return value is ?.
 
 	LONG lRet = ::BroadcastSystemMessage( BSF_IGNORECURRENTTASK | BSF_FORCEIFHUNG | 
 					BSF_POSTMESSAGE, &dwReceipents, m_uMsgCheckInst, wParam, lParam );

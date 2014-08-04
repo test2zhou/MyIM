@@ -90,7 +90,7 @@ BOOL CEIM02App::InitInstance()
 
 	// 获取命令行参数
 	char szCommand[256];
-	strcpy(szCommand, AfxGetApp()->m_lpCmdLine);
+	strncpy(szCommand, AfxGetApp()->m_lpCmdLine, strlen(AfxGetApp()->m_lpCmdLine));
 
 	// 运用程序重启
 	if (! strcmp(szCommand, "application_restart"))

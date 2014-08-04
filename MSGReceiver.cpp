@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "EIM02Dlg.h"
 #include "MSGReceiver.h"
-// Download by http://www.codefans.net
 BOOL EM_MSGReceiver::m_bMessageReceiving = TRUE;
 
 EM_MSGReceiver::EM_MSGReceiver()
