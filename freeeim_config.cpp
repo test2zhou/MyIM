@@ -33,7 +33,8 @@ EM_UserInfo *FreeEIM_Config::GetUserInfo()
 
 void FreeEIM_Config::ReadConfig()
 {
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 	// 检查用户设置文件
 /**/char szFileName[_MAX_PATH];
 /**/m_pMainTop->GetProgramDirectory(szFileName);
@@ -62,7 +63,8 @@ void FreeEIM_Config::ReadConfig()
 
 void FreeEIM_Config::SaveConfig()
 {
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 	// 检查用户设置文件
 /**/char szFileName[_MAX_PATH];
 /**/m_pMainTop->GetProgramDirectory(szFileName);
@@ -92,7 +94,8 @@ CString FreeEIM_Config::GetGroup()
 
 CString FreeEIM_Config::GetComputerName()
 {
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 
 	// 获取本机计算机名
 	return m_pMainTop->GetComputerName();

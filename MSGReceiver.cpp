@@ -26,7 +26,9 @@ EM_MSGReceiver::~EM_MSGReceiver()
 
 DWORD WINAPI EM_MSGReceiver::UDPMsgProc(LPVOID lParam)
 {
-	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetMainWnd();
+	//CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetMainWnd();
+	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
+
 	SOCKET s = socket(AF_INET, SOCK_DGRAM, 0);
 
 	if (s == INVALID_SOCKET)

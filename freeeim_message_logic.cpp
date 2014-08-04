@@ -4,7 +4,9 @@
 
 FreeEIM_Message_Logic::FreeEIM_Message_Logic()
 {
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
+
 	m_nType = FREEEIM_NONE;
 	m_szData = NULL;
 }

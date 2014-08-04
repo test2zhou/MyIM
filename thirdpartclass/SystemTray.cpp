@@ -406,7 +406,8 @@ LRESULT CSystemTray::OnTrayNotification(UINT wParam, LONG lParam)
         return 0L;
 
     CMenu menu, *pSubMenu;
-    CWnd* pTarget = AfxGetMainWnd();
+    // CWnd* pTarget = AfxGetMainWnd();
+    CWnd *pTarget = (CWnd*)AfxGetApp()->m_pMainWnd;
 
     // Clicking with right button brings up a context menu
     if (LOWORD(lParam) == WM_RBUTTONUP)

@@ -92,7 +92,8 @@ BOOL EM_MsgDlg::OnInitDialog()
 	DragAcceptFiles();
 	m_richInput.SetFocus();
 
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 
 	CString strTitle;
 	strTitle.Format(_T("与 %s 的对话"), m_strDisplayName);

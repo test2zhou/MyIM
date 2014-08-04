@@ -5,7 +5,8 @@
 
 FreeEIM_User_Logic::FreeEIM_User_Logic()
 {
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 }
 
 FreeEIM_User_Logic::~FreeEIM_User_Logic()

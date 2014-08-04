@@ -57,7 +57,8 @@ BOOL FreeEIM_UserSettingDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	// TODO: Add extra initialization here
 
-	m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CEIM02Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 
 	SetDlgItemText(IDC_EDIT1, m_pMainTop->m_config.m_strDisplayName);
 	m_cbGroup.SetWindowText(m_pMainTop->m_config.m_strGroup);

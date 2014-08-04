@@ -59,7 +59,8 @@ CString FreeEIM_History::GetHistoryPath()
 
 CEIM02Dlg *FreeEIM_History::GetMainTop()
 {
-	return (CEIM02Dlg*)AfxGetMainWnd();
+	// return (CEIM02Dlg*)AfxGetMainWnd();
+	return (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 }
 
 

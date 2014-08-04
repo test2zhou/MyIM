@@ -65,7 +65,8 @@ void EM_UserLogin::Run(EM_UserTree &hTree)
 // 发送广播登陆消息
 void EM_UserLogin::SendLogin_BC(LPEM_DATA msg)
 {
-	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetMainWnd();
+	//CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetMainWnd();
+	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 
 	SOCKET m_socket;
 	m_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
@@ -113,7 +114,8 @@ void EM_UserLogin::SendLogin_BC(LPEM_DATA msg)
 // 发送UDP登陆消息到指定的IP地址
 void EM_UserLogin::SendLogin_UDP(LPCTSTR lpszIP)
 {
-	CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
+	//CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
+	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 
 	srand(time(NULL));
 	int nTimeToWait = rand() / 1000;
@@ -143,8 +145,7 @@ void EM_UserLogin::SendLogin_UDP(LPCTSTR lpszIP)
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(UDP_SEND_PORT);
 	char *tmpBuf = myinfo.GetBuffer();
-	if (sendto(m_sock, tmpBuf, myinfo.GetLength(), 0, (PSOCKADDR)&sin, sizeof(sin))
-		== SOCKET_ERROR)
+	if (sendto(m_sock, tmpBuf, myinfo.GetLength(), 0, (PSOCKADDR)&sin, sizeof(sin))	== SOCKET_ERROR)
 	{
 		AfxMessageBox(_T("EM_UserLogin::SendLogin_UDP sendto failed"));
 		return;
@@ -156,9 +157,11 @@ void EM_UserLogin::SendLogin_UDP(LPCTSTR lpszIP)
 // 回调函数
 DWORD WINAPI EM_UserLogin::Proc_BC_Recv(LPVOID lParam)
 {
-	CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
-	if (!pDlg)
-		return 1;
+	//CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
+	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
+
+	//if (!pDlg)
+	//	return 1;
 
 	HWND hWnd = pDlg->GetSafeHwnd();
 
@@ -247,7 +250,9 @@ DWORD WINAPI EM_UserLogin::Proc_BC_Recv(LPVOID lParam)
 
 DWORD WINAPI EM_UserLogin::Proc_UDP_Recv(LPVOID lParam)
 {
-	CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
+	//CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
+	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
+
 	SOCKET s = socket(AF_INET, SOCK_DGRAM, 0);
 	if (s == INVALID_SOCKET)
 	{
@@ -273,8 +278,7 @@ DWORD WINAPI EM_UserLogin::Proc_UDP_Recv(LPVOID lParam)
 	while(1)
 	{
 		sinLen = sizeof(SOCKADDR_IN);
-		if ((ret = recvfrom(s, buf, 8192, 0, (PSOCKADDR)&client, &sinLen))
-			== SOCKET_ERROR)
+		if ((ret = recvfrom(s, buf, 8192, 0, (PSOCKADDR)&client, &sinLen)) == SOCKET_ERROR)
 		{
 			::MessageBox(0,"UDP recvfrom failed.", "Alert", MB_OK);
 			break;

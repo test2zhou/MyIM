@@ -28,10 +28,10 @@
 */
 
 // 默认分组名称
-#define FreeEIM_Default_Group	_T("FreeEIM")
+#define FreeEIM_Default_Group	_T("FreeIM")
 
 // 软件标题
-#define APP_TITLE _T("FreeEIM")
+#define APP_TITLE _T("FreeIM")
 
 #include "winsock2.h"
 

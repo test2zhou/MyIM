@@ -6,7 +6,8 @@
 
 XEIM_MESSAGE::XEIM_MESSAGE(const SOCKET sock, const char *buf, const DWORD len, const LPVOID handle)
 {
-	m_pMainTop = (CIocpui01Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CIocpui01Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CIocpui01Dlg*)AfxGetApp()->m_pMainWnd;
 	m_sock = sock;
 	memcpy((char*)&message, buf, sizeof(DWORD));
 	memcpy(buffer, buf+sizeof(DWORD), len-sizeof(DWORD));
@@ -18,7 +19,8 @@ XEIM_MESSAGE::XEIM_MESSAGE(const SOCKET sock, const char *buf, const DWORD len, 
 
 XEIM_MESSAGE::XEIM_MESSAGE(XEIM_OPERATION *PerIoData, XEIM_HANDLE *PerHandleData)
 {
-	m_pMainTop = (CIocpui01Dlg*)AfxGetMainWnd();
+	// m_pMainTop = (CIocpui01Dlg*)AfxGetMainWnd();
+	m_pMainTop = (CIocpui01Dlg*)AfxGetApp()->m_pMainWnd;
 	m_sock = PerHandleData->Socket;
 
 	memcpy((char*)&message, PerIoData->buf, sizeof(DWORD));
