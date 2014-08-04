@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "EIM02.h"
 #include "WaveOut.h"
+#include "em/stdemdef.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

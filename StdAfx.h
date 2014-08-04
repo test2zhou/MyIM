@@ -50,7 +50,7 @@
 */
 
 #define BUF_LEN				1024 * 8
-#define	VOICE_RECV_PORT		7899
+// #define	VOICE_RECV_PORT		7899
 
 #pragma warning(disable:4786) // Disable warning messages
 

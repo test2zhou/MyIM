@@ -283,6 +283,10 @@ public:
 #define UDP_SEND_PORT			UDP_RECV_MSG_PORT
 #endif // _PORT_8016
 
+#ifndef _VOICE_RECV_PORT	//	define voice listen port
+#define	VOICE_RECV_PORT		7899
+#endif
+
 // 3 Ports for socket define -------------------------------------------------------------------
 
 
