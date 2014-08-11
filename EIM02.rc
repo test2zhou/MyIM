@@ -396,7 +396,7 @@ IDB_BITMAP4             BITMAP                  "res\\Toolbar256.bmp"
 // RT_MANIFEST
 //
 
-1                       RT_MANIFEST             "res\\default1.bin"
+1                       RT_MANIFEST             "res\\default.bin"
 
 /////////////////////////////////////////////////////////////////////////////
 //

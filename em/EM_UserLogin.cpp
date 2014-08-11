@@ -160,9 +160,6 @@ DWORD WINAPI EM_UserLogin::Proc_BC_Recv(LPVOID lParam)
 	//CEIM02Dlg* pDlg = ((CEIM02Dlg*)AfxGetMainWnd());
 	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 
-	//if (!pDlg)
-	//	return 1;
-
 	HWND hWnd = pDlg->GetSafeHwnd();
 
 	char buf[4096];
@@ -218,7 +215,7 @@ DWORD WINAPI EM_UserLogin::Proc_BC_Recv(LPVOID lParam)
 				// Add to tree ---------------------------------------------------
 				pDlg->_User_AddNewUser(name, uinfo);
 				// ===============================================================
-				// Reply that i was online.---------------------------------------
+				// Reply that i am online.---------------------------------------
 				pDlg->SendMessage(WM_REPLYBCMSG, (WPARAM)tmp, NULL);
 				// ===============================================================
 			}
@@ -227,7 +224,7 @@ DWORD WINAPI EM_UserLogin::Proc_BC_Recv(LPVOID lParam)
 				char *tmp = new char[128];
 				strcpy(tmp, ip);
 				::PostMessage(hWnd, WM_USERLOGOUT, (WPARAM)tmp, NULL);
-			//	pDlg->_User_DeleteUser(uinfo);
+				// pDlg->_User_DeleteUser(uinfo);
 			}
 			else
 			{

@@ -2,7 +2,6 @@
 // 飞鸽传书 FreeEIM 主程序
 // 更新日期：2009年12月3日
 // 作者：蔡镇秋(freeeim@gmail.com)
-// 飞鸽传书官方网站：http://www.freeeim.com/
 // 功能：读取程序配置文件
 
 #ifndef _FreeEIM_Config

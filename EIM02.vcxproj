@@ -228,7 +228,6 @@
     <Image Include="res\usericon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="res\default1.bin" />
     <CustomBuild Include="res\EIM02.rc2" />
   </ItemGroup>
   <ItemGroup>
