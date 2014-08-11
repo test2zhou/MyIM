@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by EIM02.rc
+// Microsoft Visual C++ 生成的包含文件。
+// 供 EIM02.rc 使用
 //
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
@@ -28,6 +28,7 @@
 #define IDD_VOICE2                      145
 #define IDD_VIEWHISTORY                 146
 #define IDI_HISTORY                     147
+#define IDD_USER_LOGIN                  147
 #define IDB_BITMAP2                     148
 #define IDB_BITMAP3                     149
 #define IDD_DIALOG5                     152
@@ -41,6 +42,7 @@
 #define IDC_RICHEDIT1                   1005
 #define IDC_EDIT1                       1006
 #define IDC_BUTTON1                     1007
+#define IDC_EDIT7                       1007
 #define IDC_BUTTON2                     1008
 #define IDC_BUTTON3                     1009
 #define IDC_VOICECHAT                   1009
@@ -117,13 +119,15 @@
 #define ID_BUTTON32808                  32808
 #define ID_BUTTON32809                  32809
 #define IDM_REDIT_PASTE                 32810
+#define ID_32811                        32811
+#define IDM_SHOWLOGIN                   32812
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        160
-#define _APS_NEXT_COMMAND_VALUE         32811
+#define _APS_NEXT_COMMAND_VALUE         32813
 #define _APS_NEXT_CONTROL_VALUE         1036
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

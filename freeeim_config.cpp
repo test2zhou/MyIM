@@ -76,6 +76,9 @@ void FreeEIM_Config::SaveConfig()
 	{
 		iniReader.setKey((LPCTSTR)m_strDisplayName, "display", "freeeim");
 		iniReader.setKey((LPCTSTR)m_strGroup, "group", "freeeim");
+
+		iniReader.setKey((LPCTSTR)m_strAccount, "account", "freeeim");
+		iniReader.setKey((LPCTSTR)m_strPassWD, "passwd", "freeeim");
 	}
 }
 

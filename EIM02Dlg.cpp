@@ -6,6 +6,7 @@
 #include "winsock2.h"
 #include "UserSettingDlg.h"
 #include "EM_UserProperty.h"
+#include "UserLoginDlg.h"
 #include "atlbase.h"
 //#include "Registry.h"
 #include "EIM_ViewHistory.h"
@@ -112,6 +113,7 @@ BEGIN_MESSAGE_MAP(CEIM02Dlg, CDialog)
 	ON_COMMAND(ID_TRAYQUIT, OnQuit)
 	ON_COMMAND(IDM_HELPTOPIC, OnHelptopic)
 	ON_COMMAND(IDM_SHOWNAME, EM_UserSetting)
+	ON_COMMAND(IDM_SHOWLOGIN, EM_UserLogin)
 	ON_COMMAND(IDM_ABOUTEIM, OnAbouteim)
 	ON_COMMAND(ID_TRAYRESTORE, OnTrayRestore)
 	ON_COMMAND(IDM_QUITEIM, OnQuiteim)
@@ -700,6 +702,13 @@ void CEIM02Dlg::EM_UserSetting()
 	dlg.DoModal();
 }
 
+void CEIM02Dlg::EM_UserLogin()
+{
+	// TODO: Add your command handler code here
+	ZXY_UserLoginDlg dlg;
+	dlg.DoModal();
+}
+
 /* 2009年12月3日 // 不让用户自动启动，用其他方案解决
 void CEIM02Dlg::EM_OnAutorun() 
 {
@@ -973,6 +982,34 @@ void CEIM02Dlg::EM_UpdateUserInfo(LPCTSTR lpszName, LPCTSTR lpszGroup)
 	//	strcpy(m_szLocalName, lpszName);
 		// 放最后
 		m_UserLogin.ReName(lpszName);
+	}
+
+	m_config.SaveConfig();
+/*	CString str;
+	str = m_szLocalGroup;
+	str += m_szLocalName;
+	SetWindowText(str);*/
+}
+
+void CEIM02Dlg::EM_LoginServer(LPCTSTR lpszAccount, LPCTSTR lpszPassWord) {
+	CString strAccount = lpszAccount;
+	CString strPassWord = lpszPassWord;
+
+	if (strAccount != m_config.m_strAccount)
+	{
+		m_config.m_strAccount = strAccount;
+	//	g_uiLocal.SetGroupName();
+	//	strcpy(m_szLocalGroup, lpszGroup);
+		// 放最后
+		// m_UserLogin.ReGroup(lpszGroup);
+	}
+	if (strPassWord != m_config.m_strPassWD)
+	{
+	//	g_uiLocal.SetDisplayName();
+		m_config.m_strPassWD = strPassWord;
+	//	strcpy(m_szLocalName, lpszName);
+		// 放最后
+		// m_UserLogin.ReName(lpszName);
 	}
 
 	m_config.SaveConfig();

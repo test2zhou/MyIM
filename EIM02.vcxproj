@@ -166,6 +166,7 @@
     </ClCompile>
     <ClCompile Include="em\stdemdef.cpp" />
     <ClCompile Include="thirdpartclass\SystemTray.cpp" />
+    <ClCompile Include="UserLoginDlg.cpp" />
     <ClCompile Include="UserSettingDlg.cpp" />
     <ClCompile Include="WaveIn.cpp" />
     <ClCompile Include="WaveOut.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="em\stdemdef.h" />
     <ClInclude Include="thirdpartclass\SystemTray.h" />
+    <ClInclude Include="UserLoginDlg.h" />
     <ClInclude Include="UserSettingDlg.h" />
     <ClInclude Include="WaveIn.h" />
     <ClInclude Include="WaveOut.h" />
@@ -232,6 +234,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\default.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

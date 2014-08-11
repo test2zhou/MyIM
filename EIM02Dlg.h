@@ -144,6 +144,7 @@ public:
 	void InitUI();
 	void CreateToday_sFile();
 	void EM_UpdateUserInfo(LPCTSTR lpszName, LPCTSTR lpszGroup);
+	void EM_LoginServer(LPCTSTR lpszAccount, LPCTSTR lpszPassWord);
 	void SendMSGToAll(LPEM_DATA lpData);
 	void EM_HideLoading();
 
@@ -186,6 +187,7 @@ protected:
 	afx_msg void OnHelptopic();
 	afx_msg void OnViewHistory();
 	afx_msg void EM_UserSetting();
+	afx_msg void EM_UserLogin();
 	afx_msg void OnAbouteim();
 	afx_msg void OnTrayRestore();
 	afx_msg LRESULT OnTrayNotification(WPARAM wParam, LPARAM lParam);

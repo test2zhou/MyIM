@@ -33,6 +33,9 @@ public:
 	CString m_strDisplayName;
 	CString m_strGroup;
 
+	CString m_strAccount;
+	CString m_strPassWD;
+
 	// 功能：读取本地计算机名
 	// 更新日期：2009年12月5日
 	CString GetComputerName();
