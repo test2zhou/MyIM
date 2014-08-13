@@ -151,8 +151,10 @@
     <ClCompile Include="freeeim_config.cpp" />
     <ClCompile Include="freeeim_history.cpp" />
     <ClCompile Include="freeeim_message_logic.cpp" />
-    <ClCompile Include="freeeim_package.cpp" />
     <ClCompile Include="freeeim_user_logic.cpp" />
+    <ClCompile Include="server\CS_Packet.cpp" />
+    <ClCompile Include="server\CS_PacketHelper.cpp" />
+    <ClCompile Include="server\CS_ServerMng.cpp" />
     <ClCompile Include="thirdpartclass\GetHardSoftInfo.cpp" />
     <ClCompile Include="ImageDataObject.cpp" />
     <ClCompile Include="thirdpartclass\INI.cpp" />
@@ -196,8 +198,11 @@
     <ClInclude Include="freeeim_config.h" />
     <ClInclude Include="freeeim_history.h" />
     <ClInclude Include="freeeim_message_logic.h" />
-    <ClInclude Include="freeeim_package.h" />
     <ClInclude Include="freeeim_user_logic.h" />
+    <ClInclude Include="server\CS_Packet.h" />
+    <ClInclude Include="server\CS_PacketHelper.h" />
+    <ClInclude Include="server\CS_Protocol.h" />
+    <ClInclude Include="server\CS_ServerMng.h" />
     <ClInclude Include="thirdpartclass\GetHardSoftInfo.h" />
     <ClInclude Include="ImageDataObject.h" />
     <ClInclude Include="thirdpartclass\INI.h" />

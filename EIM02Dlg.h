@@ -147,6 +147,7 @@ public:
 	void EM_LoginServer(LPCTSTR lpszAccount, LPCTSTR lpszPassWord);
 	void SendMSGToAll(LPEM_DATA lpData);
 	void EM_HideLoading();
+	void EM_ShowLoading();
 
 	// FreeEIM 初始化工作
 	void EM_OnInitDlg();

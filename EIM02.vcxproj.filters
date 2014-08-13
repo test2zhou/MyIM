@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="EIM02.cpp" />
+    <ClCompile Include="EIM02Dlg.cpp" />
+    <ClCompile Include="EIM_ViewHistory.cpp" />
+    <ClCompile Include="EIMChatingWaiter.cpp" />
+    <ClCompile Include="em\EM_FileReceiving.cpp" />
+    <ClCompile Include="em\EM_FileSendingDlg.cpp" />
+    <ClCompile Include="em\EM_GroupInfo.cpp" />
+    <ClCompile Include="EM_MsgDlg.cpp" />
+    <ClCompile Include="EM_RecvChat.cpp" />
+    <ClCompile Include="EM_SendChat.cpp" />
+    <ClCompile Include="em\EM_UserInfo.cpp" />
+    <ClCompile Include="em\EM_UserLogin.cpp" />
+    <ClCompile Include="EM_UserProperty.cpp" />
+    <ClCompile Include="em\EM_UserTree.cpp" />
+    <ClCompile Include="em\EMRichEdit.cpp" />
+    <ClCompile Include="freeeim_config.cpp" />
+    <ClCompile Include="freeeim_history.cpp" />
+    <ClCompile Include="freeeim_message_logic.cpp" />
+    <ClCompile Include="freeeim_user_logic.cpp" />
+    <ClCompile Include="thirdpartclass\GetHardSoftInfo.cpp" />
+    <ClCompile Include="ImageDataObject.cpp" />
+    <ClCompile Include="thirdpartclass\INI.cpp" />
+    <ClCompile Include="MSGReceiver.cpp" />
+    <ClCompile Include="thirdpartclass\PictureEx.cpp" />
+    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="em\stdemdef.cpp" />
+    <ClCompile Include="thirdpartclass\SystemTray.cpp" />
+    <ClCompile Include="UserLoginDlg.cpp" />
+    <ClCompile Include="UserSettingDlg.cpp" />
+    <ClCompile Include="WaveIn.cpp" />
+    <ClCompile Include="WaveOut.cpp" />
+    <ClCompile Include="webbrowser2.cpp" />
+    <ClCompile Include="thirdpartclass\WinAppEx.cpp" />
+    <ClCompile Include="XEIM_Database.cpp" />
+    <ClCompile Include="server\CS_Packet.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="server\CS_PacketHelper.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="server\CS_ServerMng.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EIM02.h" />
+    <ClInclude Include="EIM02Dlg.h" />
+    <ClInclude Include="EIM_ViewHistory.h" />
+    <ClInclude Include="EIMChatingWaiter.h" />
+    <ClInclude Include="em\EM_FileReceiving.h" />
+    <ClInclude Include="em\EM_FileSendingDlg.h" />
+    <ClInclude Include="em\EM_GroupInfo.h" />
+    <ClInclude Include="EM_MsgDlg.h" />
+    <ClInclude Include="EM_RecvChat.h" />
+    <ClInclude Include="EM_SendChat.h" />
+    <ClInclude Include="em\EM_UserInfo.h" />
+    <ClInclude Include="em\EM_UserLogin.h" />
+    <ClInclude Include="EM_UserProperty.h" />
+    <ClInclude Include="em\EM_UserTree.h" />
+    <ClInclude Include="em\EMRichEdit.h" />
+    <ClInclude Include="freeeim_config.h" />
+    <ClInclude Include="freeeim_history.h" />
+    <ClInclude Include="freeeim_message_logic.h" />
+    <ClInclude Include="freeeim_user_logic.h" />
+    <ClInclude Include="thirdpartclass\GetHardSoftInfo.h" />
+    <ClInclude Include="ImageDataObject.h" />
+    <ClInclude Include="thirdpartclass\INI.h" />
+    <ClInclude Include="MSGReceiver.h" />
+    <ClInclude Include="thirdpartclass\PictureEx.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="em\stdemdef.h" />
+    <ClInclude Include="thirdpartclass\SystemTray.h" />
+    <ClInclude Include="UserLoginDlg.h" />
+    <ClInclude Include="UserSettingDlg.h" />
+    <ClInclude Include="WaveIn.h" />
+    <ClInclude Include="WaveOut.h" />
+    <ClInclude Include="webbrowser2.h" />
+    <ClInclude Include="thirdpartclass\WinAppEx.h" />
+    <ClInclude Include="XEIM_Database.h" />
+    <ClInclude Include="server\CS_Packet.h">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="server\CS_Protocol.h">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="server\CS_PacketHelper.h">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="server\CS_ServerMng.h">
+      <Filter>server</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\EIM02.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EIM02.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap4.bmp" />
+    <Image Include="res\chat.ico" />
+    <Image Include="res\edit_user.ico" />
+    <Image Include="res\EIM02.ico" />
+    <Image Include="res\history.ico" />
+    <Image Include="res\i_animated_loading_32_2.gif" />
+    <Image Include="res\List.bmp" />
+    <Image Include="res\MAINFRAME_CONTACT.bmp" />
+    <Image Include="res\MAINFRAME_LINE.bmp" />
+    <Image Include="res\toolbar1.bmp" />
+    <Image Include="res\Toolbar256.bmp" />
+    <Image Include="res\usericon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\default.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="server">
+      <UniqueIdentifier>{1e689696-46fd-484a-8f4f-35fa2340988d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

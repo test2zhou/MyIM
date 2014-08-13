@@ -15,6 +15,8 @@
 #define FREEEIM_NONE		0x00
 #define FREEEIM_TEXT		0x01
 
+#include <string>
+
 class CEIM02Dlg;
 class EM_UserInfo;
 
@@ -35,6 +37,9 @@ public:
 
 	CString m_strAccount;
 	CString m_strPassWD;
+
+	std::string m_strIP;
+	int m_nPort;
 
 	// 功能：读取本地计算机名
 	// 更新日期：2009年12月5日

@@ -3,10 +3,15 @@
 #include "thirdpartclass/INI.h"
 #include "freeeim_config.h"
 #include "em/EM_UserInfo.h"
+
+#define CONFIG_INI "freeeim.ini"
+
 FreeEIM_Config::FreeEIM_Config()
 {
 	m_strDisplayName = "";
 	m_strGroup = "";
+	m_strIP = "10.121.9.10";
+	m_nPort = 8888;
 
 	m_pUserInfo = NULL;
 	ReadConfig();
@@ -38,7 +43,7 @@ void FreeEIM_Config::ReadConfig()
 	// 检查用户设置文件
 /**/char szFileName[_MAX_PATH];
 /**/m_pMainTop->GetProgramDirectory(szFileName);
-/**/strcat(szFileName, "freeeim.ini");
+/**/strcat(szFileName, CONFIG_INI);
 
 	CIniReader iniReader(szFileName);
 
@@ -49,7 +54,15 @@ void FreeEIM_Config::ReadConfig()
 
 		// 当前分组
 		m_strGroup = iniReader.getKeyValue("group", "freeeim");
-	}
+
+		m_strAccount = iniReader.getKeyValue("account", "freeeim");
+		m_strPassWD = iniReader.getKeyValue("passwd", "freeeim");
+		
+		m_strIP = iniReader.getKeyValue("host", "freeeim");
+		std::string strPort = iniReader.getKeyValue("port", "freeeim");
+		m_nPort = strtoul(strPort.c_str(), NULL, 10);
+
+	}	
 	else // 如果没有配置文件则新建一个，并且使用默认信息
 	{
 		m_strDisplayName = GetComputerName();
@@ -68,7 +81,7 @@ void FreeEIM_Config::SaveConfig()
 	// 检查用户设置文件
 /**/char szFileName[_MAX_PATH];
 /**/m_pMainTop->GetProgramDirectory(szFileName);
-/**/strcat(szFileName, "freeeim.ini");
+/**/strcat(szFileName, CONFIG_INI);
 
 	CIniReader iniReader(szFileName);
 

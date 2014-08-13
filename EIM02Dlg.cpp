@@ -363,6 +363,21 @@ HBRUSH CEIM02Dlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 }
 
 // 启动画面结束后的处理
+void CEIM02Dlg::EM_ShowLoading() {
+	GetDlgItem(IDC_STATIC_OL)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_STATIC_GROUP)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_STATIC_LINE)->ShowWindow(SW_HIDE);
+	m_treeCtrlList.ShowWindow(SW_HIDE);	
+
+	if (m_pictureLoading.Load(MAKEINTRESOURCE(IDR_GIFLOADING),_T("GIF")))
+		m_pictureLoading.Draw();
+	
+	m_pictureLoading.SetBkColor(RGB(255,255,255));
+	::ShowWindow(::GetDlgItem(m_hWnd, IDC_LOADGIF), SW_SHOW);
+	::ShowWindow(::GetDlgItem(m_hWnd, IDC_LOADING), SW_SHOW);
+	
+}
+
 void CEIM02Dlg::EM_HideLoading()
 {
 	m_pictureLoading.Stop();
@@ -1401,10 +1416,10 @@ void CEIM02Dlg::InitUI()
 	m_crStatic = RGB(41,109,193);
 
 	// 部分窗口先隐藏
-	GetDlgItem(IDC_STATIC_OL)->ShowWindow(SW_HIDE);
-	GetDlgItem(IDC_STATIC_GROUP)->ShowWindow(SW_HIDE);
-	GetDlgItem(IDC_STATIC_LINE)->ShowWindow(SW_HIDE);
-	m_treeCtrlList.ShowWindow(SW_HIDE);
+	// GetDlgItem(IDC_STATIC_OL)->ShowWindow(SW_HIDE);
+	// GetDlgItem(IDC_STATIC_GROUP)->ShowWindow(SW_HIDE);
+	// GetDlgItem(IDC_STATIC_LINE)->ShowWindow(SW_HIDE);
+	// m_treeCtrlList.ShowWindow(SW_HIDE);
 
 	// 用户列表字体颜色
 	m_treeCtrlList.SetTextColor(RGB(25, 79, 149));
@@ -1417,10 +1432,11 @@ void CEIM02Dlg::InitUI()
 	//===================================================================================
 
 	// 启动画面创建----------------------------------------------------------------------
-	if (m_pictureLoading.Load(MAKEINTRESOURCE(IDR_GIFLOADING),_T("GIF")))
-		m_pictureLoading.Draw();
-	m_pictureLoading.SetBkColor(RGB(255,255,255));
+	// if (m_pictureLoading.Load(MAKEINTRESOURCE(IDR_GIFLOADING),_T("GIF")))
+	// 	m_pictureLoading.Draw();
+	// m_pictureLoading.SetBkColor(RGB(255,255,255));
 	//===================================================================================
+	EM_ShowLoading();
 	
 	// 系统托盘图标创建------------------------------------------------------------------
 	char buf[512];
