@@ -11,6 +11,7 @@
 //#include "Registry.h"
 #include "EIM_ViewHistory.h"
 //#include "FIM_SerialNumberDlg.h"
+#include "server/CS_ServerMng.h"
 
 #include "XEIM_Database.h"
 
@@ -130,6 +131,7 @@ BEGIN_MESSAGE_MAP(CEIM02Dlg, CDialog)
 	ON_COMMAND(IDM_NOTE, OnNote)
 	ON_MESSAGE(WM_NEW_FILE, EM_NewFile)
 	ON_MESSAGE(WM_NEW_MSG, EM_NewMsg)
+	ON_MESSAGE(WM_CSMSG, EM_CSMsg)
 	ON_MESSAGE(WM_DOWNLOADFILE, EM_DownloadFile)
 	ON_MESSAGE(WM_DESTACCEPTFILE, EM_DestAcceptFile)
 	ON_MESSAGE(WM_DELETEFILE, EM_DeleteFileFromList)
@@ -197,6 +199,9 @@ BOOL CEIM02Dlg::OnInitDialog()
 
 	// 线程同步
 	InitializeCriticalSection(& cs);
+
+	//
+	CServerMng::getInstance();
 
 	// FreeEIM 初始化工作
 	EM_OnInitDlg();
@@ -583,6 +588,46 @@ void CEIM02Dlg::OnViewHistory()
 
 // 对方发消息过来后这这样处理
 LRESULT CEIM02Dlg::EM_NewMsg(WPARAM wParam, LPARAM lParam)
+{
+	char *pBuf = (char*)wParam;
+
+	char *szIP = (char*)lParam;
+
+	HTREEITEM hItem = _User_GetUserItem(szIP);
+	if (NULL != hItem)
+	{
+		EM_MsgDlg *pDlg = _Msg_GetDialog(hItem);
+
+		pDlg->AddRecvText(pBuf);
+
+		// 为什么不直接 m_Chatdlg[index]->ShowWindow(SW_NORMAL);
+		// 因为直接那样显示，Chat窗口的焦点会失去，焦点回到Main窗口.
+		// 可能是TreeCtrl 的问题
+		PostMessage(WM_EMDBLCLICKTREE, (WPARAM)pDlg, (LPARAM)2);
+	}
+	else
+	{
+		CString strInfo;
+		strInfo.Format("来自[%s]的消息", szIP);
+		MessageBox(pBuf, strInfo, MB_OK | MB_ICONINFORMATION);
+	}
+
+
+	// 播放消息提示声音
+/*	char szDir[MAX_PATH];
+	GetProgramDirectory((char*)szDir);
+	strcat(szDir, "sounds\\");
+	strcat(szDir, "sound_1.wav");
+	PlaySound(szDir, NULL, SND_FILENAME | SND_ASYNC);*/
+
+	delete pBuf;
+	return TRUE;
+}
+
+
+
+// 对方发消息过来后这这样处理
+LRESULT CEIM02Dlg::EM_CSMsg(WPARAM wParam, LPARAM lParam)
 {
 	char *pBuf = (char*)wParam;
 
@@ -1028,6 +1073,9 @@ void CEIM02Dlg::EM_LoginServer(LPCTSTR lpszAccount, LPCTSTR lpszPassWord) {
 	}
 
 	m_config.SaveConfig();
+	std::string stAcc = strAccount.GetString();
+	std::string stPas = strPassWord.GetString();
+	CServerMng::getInstance()->TryLogin(stAcc, stPas);
 /*	CString str;
 	str = m_szLocalGroup;
 	str += m_szLocalName;

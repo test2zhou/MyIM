@@ -388,6 +388,8 @@ public:
 
 // 局域网中，其他用户修改了用户信息
 #define		WM_DESKUPDATEINFO		WM_USER + 0x059
+
+#define		WM_CSMSG				WM_USER + 0x060
 // 4 Windows message define --------------------------------------------------------------------
 
 

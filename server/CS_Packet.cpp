@@ -15,6 +15,37 @@ CPacket::CPacket(UINT16 protocol, UINT32 len)
 	writeUInt(m_cVersion);
 }
 
+CPacket::CPacket(char* buf, UINT32 len)
+:m_sProtocol(0),
+m_cVersion(0)
+{
+	m_pBuff = buf;
+	m_pCurr = m_pBuff;
+	m_nLen = len;
+}
+
+CPacket * CPacket::Create(char* buf, UINT32 len)
+{
+	if (len < sizeof(UINT16) + sizeof(UINT8)) {
+		SAFE_DELETE(buf);
+		return nullptr;
+	}
+
+	CPacket* p = new CPacket(buf, len);
+
+	UINT16 pro = 0;
+	p->readUInt(pro);
+
+	UINT8 v = 0;
+	p->readUInt(v);
+
+	if (v != CS_VERSION) {
+		SAFE_DELETE(p);
+		return nullptr;
+	}
+	p->setProtocol(pro);
+	return p;	
+}
 
 CPacket::~CPacket(void)
 {
@@ -76,4 +107,17 @@ bool CPacket::expand(size_t sz) {
 	m_pCurr = m_pBuff + l;
 	m_nLen = ns;
 	return TRUE;
+}
+
+
+char* CPacket::getBuffer() const {
+	return m_pBuff;
+}
+
+UINT32 CPacket::getLength() const {
+	return m_nLen;
+}
+
+void CPacket::setProtocol(UINT16 p) {
+	m_sProtocol = p;
 }

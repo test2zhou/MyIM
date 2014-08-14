@@ -14,36 +14,32 @@ enum _emMsgType {
 // CServerMng
 
 class CPacket;
-class CServerMng : public CWinThread
+class CServerMng 
 {
-	DECLARE_DYNCREATE(CServerMng)
-
-protected:
 	CServerMng();           // 动态创建所使用的受保护的构造函数
 	virtual ~CServerMng();
 
 public:
-	virtual BOOL InitInstance();
-	virtual int ExitInstance();
 
-	bool tryConnect(std::string ip, int port);
-	bool tryLogin(std::string strAccount, std::string strPasswd);
-	bool sendMessage(const char* msg, size_t len, int type);
-	void requestInterest();
-	void stop();
+	static CServerMng* getInstance();
 
-protected:
-	DECLARE_MESSAGE_MAP()
+	bool TryLogin(std::string strAccount, std::string strPasswd);
+	void SendPacket(CPacket*);
+
+	static DWORD WINAPI NetWork(LPVOID lParam);
+
+	std::list<CPacket *> *m_plistSend;
+	std::list<CPacket *> *m_plistRecv;
 
 private:
 
 	bool m_bLoginFlag;
-	bool m_bConnectFlag;
-	int m_nFD;
 
+	CRITICAL_SECTION m_sendLock;
+	CRITICAL_SECTION m_recvLock;
 	
-	std::list<CPacket *> m_listSend;
-	std::list<CPacket *> m_listRecv;
+	HANDLE m_hThread;
+	DWORD m_tid;
 };
 
 

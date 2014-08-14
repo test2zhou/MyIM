@@ -172,6 +172,7 @@ protected:
 	afx_msg LRESULT FileComming(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_DownloadFile(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_NewMsg(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT EM_CSMsg(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_NewFile(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_AddFileToList(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_FileSendCompleted(WPARAM wParam, LPARAM lParam);
