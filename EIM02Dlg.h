@@ -172,7 +172,8 @@ protected:
 	afx_msg LRESULT FileComming(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_DownloadFile(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_NewMsg(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT EM_CSMsg(WPARAM wParam, LPARAM lParam);
+	// afx_msg LRESULT EM_CSMsg(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT EM_CSPacket(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_NewFile(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_AddFileToList(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_FileSendCompleted(WPARAM wParam, LPARAM lParam);
@@ -186,6 +187,7 @@ protected:
 	afx_msg LRESULT EM_Voice_DestAcceptChat(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_ShakeWindow(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT EM_ViewHistory(WPARAM wParam, LPARAM lParam);
+	
 	afx_msg void OnHelptopic();
 	afx_msg void OnViewHistory();
 	afx_msg void EM_UserSetting();

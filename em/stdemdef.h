@@ -390,6 +390,7 @@ public:
 #define		WM_DESKUPDATEINFO		WM_USER + 0x059
 
 #define		WM_CSMSG				WM_USER + 0x060
+#define		WM_CSPACKET				WM_USER + 0x061
 // 4 Windows message define --------------------------------------------------------------------
 
 

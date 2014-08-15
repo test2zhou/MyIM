@@ -3,8 +3,10 @@
 #include "CS_Protocol.h"
 
 
+
 CPacket::CPacket(UINT16 protocol, UINT32 len)
-:m_sProtocol(protocol)
+:m_sProtocol(protocol),
+m_strUserID("")
 {
 	m_pBuff = (char *)calloc(1, len);
 	m_pCurr = m_pBuff;
@@ -17,6 +19,7 @@ CPacket::CPacket(UINT16 protocol, UINT32 len)
 
 CPacket::CPacket(char* buf, UINT32 len)
 :m_sProtocol(0),
+m_strUserID(""),
 m_cVersion(0)
 {
 	m_pBuff = buf;
@@ -44,6 +47,7 @@ CPacket * CPacket::Create(char* buf, UINT32 len)
 		return nullptr;
 	}
 	p->setProtocol(pro);
+	p->Parse();
 	return p;	
 }
 
@@ -121,3 +125,12 @@ UINT32 CPacket::getLength() const {
 void CPacket::setProtocol(UINT16 p) {
 	m_sProtocol = p;
 }
+
+const char* CPacket::getUserID() {
+	return m_strUserID.c_str();
+}
+
+void CPacket::Parse() {
+
+}
+

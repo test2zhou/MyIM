@@ -116,7 +116,7 @@ void ZXY_UserLoginDlg::OnOK()
 	//}
 
 	m_pMainTop->EM_LoginServer(strName, strPassWd);
-	m_pMainTop->EM_ShowLoading();
+	// m_pMainTop->EM_ShowLoading();
 
 	CDialog::OnOK();
 }

@@ -13,11 +13,15 @@ public:
 	virtual ~CPacket(void);
 
 	static CPacket* Create(char* , UINT32);
-	
+
+	//	
+	const char* getUserID();
 	void setProtocol(UINT16);
+	void Parse();
 	char* getBuffer() const;
 	UINT32 getLength() const;
 
+	//
 	void writeData(void* , size_t );
 	void readData(void* , size_t );
 
@@ -65,9 +69,9 @@ public:
 			readData(&a, s);
 		}
 	}
-	
-	void* operator new (size_t sz) {return ::malloc(sz);}
-	void  operator delete (void* ptr) {return ::free(ptr);}
+
+	//void * CPacket::operator new(size_t sz) {return ::malloc(sz);}
+	//void CPacket::operator delete(void* p) {return ::free(p);};
 
 private:
 	UINT16 m_sProtocol;
@@ -76,7 +80,7 @@ private:
 	char* m_pBuff;
 	char* m_pCurr;
 	UINT32 m_nLen;
-
+	std::string m_strUserID;
 
 };
 

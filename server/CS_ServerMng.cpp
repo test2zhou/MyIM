@@ -3,9 +3,9 @@
 
 #include "stdafx.h"
 #include "CS_ServerMng.h"
+#include "CS_Packet.h"
 #include "CS_PacketHelper.h"
 #include "CS_Protocol.h"
-#include "CS_Packet.h"
 #include "../EIM02Dlg.h"
 #include <assert.h>
 
@@ -58,6 +58,7 @@ bool CServerMng::TryLogin(std::string strAccount, std::string strPasswd) {
 
 DWORD WINAPI CServerMng::NetWork(LPVOID lParam) {
 	g_bKeepAlive = true;
+	Sleep(1000);
 	CEIM02Dlg *pDlg = (CEIM02Dlg*)AfxGetApp()->m_pMainWnd;
 	CServerMng * pMng = (CServerMng*)lParam;
 	std::string &ip = pDlg->m_config.m_strIP;
@@ -81,7 +82,15 @@ DWORD WINAPI CServerMng::NetWork(LPVOID lParam) {
 		return FALSE;
 	}
 
+	fd_set rfds;
+	FD_ZERO(&rfds);
+
+	int n = 0, len = 0;
+	DWORD start, stop;
+	UINT16 packLen;
+	char head[2];
 	while(g_bKeepAlive) {
+		start = GetTickCount();
 		list<CPacket*> *listPacket;
 		::EnterCriticalSection(&pMng->m_sendLock);
 		listPacket = pMng->m_plistSend;
@@ -91,62 +100,97 @@ DWORD WINAPI CServerMng::NetWork(LPVOID lParam) {
 		if (listPacket) {
 			for (auto it = listPacket->begin(); it != listPacket->end(); it++) {
 				p = *it;
-				int n = send(fd, p->getBuffer(), p->getLength(), 0);
+				packLen = p->getLength();
+				head[0] = packLen & 0xFF00 >> 8;
+				head[1] = packLen & 0x00FF;
+				while(1) {
+					n = send(fd, head, sizeof(head), 0);
+					if (n < 0) {
+						if (errno == EAGAIN|| errno == EINTR) {
+							continue;
+						} else {
+							AfxMessageBox("send data to server failed.");
+							shutdown(fd, SD_BOTH);
+							closesocket(fd);
+							return FALSE;
+						}
+					}
+					assert(n == sizeof(head));
+					break;
+				}
+				
+				while (1) {
+					n = send(fd, p->getBuffer(), p->getLength(), 0);
+					if (n < 0) {
+						if (errno == EAGAIN|| errno == EINTR) {
+							continue;
+						} else {
+							AfxMessageBox("send data to server failed.");
+							shutdown(fd, SD_BOTH);
+							closesocket(fd);
+							return FALSE;
+						}
+					}
+					assert(n == p->getLength());
+					break;
+				}
+				SAFE_DELETE(p);
+			}
+			SAFE_DELETE(listPacket);
+		}
+
+		char *b;
+		FD_SET(fd, &rfds);
+		struct timeval tv = {0,0};
+		while(1) {
+			n = select(fd+1, &rfds, nullptr, nullptr, &tv);
+			if (n < 1)
+				break;
+
+			memset(head, 0, sizeof(head));
+			while(1) {
+				n = recv(fd, head, sizeof(head), 0);
 				if (n < 0) {
-					if (errno == EAGAIN|| errno == EINTR) {
-						n = 0;
+					if (errno == EAGAIN || errno == EINTR) {
+						continue;
 					} else {
-						AfxMessageBox("send data to server failed.");
 						shutdown(fd, SD_BOTH);
 						closesocket(fd);
 						return FALSE;
 					}
 				}
-				if (n == p->getLength()) {
-					SAFE_DELETE(p);
-				} else {
-					// : TODO
-					assert(false);
-				}
+				assert(n == sizeof(head));
+				break;
 			}
-		}
 
-		int len = 0;
-		char h[2] = {0};
-		char *b;
-		while(1) {
-			memset(h, 0, 2);
-			int n = recv(fd, h, len, 0);
-			if (n < 0) {
-				if (errno == EAGAIN || errno == EINTR) {
-					break;
-				} else {
-					shutdown(fd, SD_BOTH);
-					closesocket(fd);
-					return FALSE;
+			b = (char*)calloc(1, len);
+			len = head[0] << 8 | head[1];
+			while(1) {
+				n = recv(fd, b, len, 0);
+				if (n < 0) {
+					if (errno == EAGAIN || errno == EINTR) {
+						continue;
+					} else {
+						shutdown(fd, SD_BOTH);
+						closesocket(fd);
+						return FALSE;
+					}
 				}
-			} else if (n == 0) {
+				assert(n == len);
 				break;
 			}
-			len = h[0] << 8 | h[1];
-			b = (char*)malloc(len);
-			n = recv(fd, b, len, 0);
-			if (n < 0) {
-				if (errno == EAGAIN || errno == EINTR) {
-					assert(false);
-				} else {
-					shutdown(fd, SD_BOTH);
-					closesocket(fd);
-					return FALSE;
-				}
-			} else if (n == 0) {
-				break;
-			}
-			p = CPacket::Create(b, (UINT32)len);
-			::EnterCriticalSection(&pMng->m_recvLock);
-			pDlg->SendMessage(WM_CSMSG, (WPARAM)p, (LPARAM)nullptr);
-			::LeaveCriticalSection(&pMng->m_recvLock);
-		}		
+			::OutputDebugString(b);			
+			::OutputDebugString("\n");
+			pDlg->SendMessage(WM_CSPACKET, (WPARAM)b, (LPARAM)head);
+		}
+		
+		stop = GetTickCount();
+		CString outp;
+		outp.Format("GetTickCount: %lu ms\n", stop - start);
+		::OutputDebugString(outp);
+		if (stop - start < 1000) {
+			Sleep(1000);
+		}
 	}
 	return FALSE;
 }

@@ -131,7 +131,8 @@ BEGIN_MESSAGE_MAP(CEIM02Dlg, CDialog)
 	ON_COMMAND(IDM_NOTE, OnNote)
 	ON_MESSAGE(WM_NEW_FILE, EM_NewFile)
 	ON_MESSAGE(WM_NEW_MSG, EM_NewMsg)
-	ON_MESSAGE(WM_CSMSG, EM_CSMsg)
+	// ON_MESSAGE(WM_CSMSG, EM_CSMsg)
+	ON_MESSAGE(WM_CSPACKET, EM_CSPacket)
 	ON_MESSAGE(WM_DOWNLOADFILE, EM_DownloadFile)
 	ON_MESSAGE(WM_DESTACCEPTFILE, EM_DestAcceptFile)
 	ON_MESSAGE(WM_DELETEFILE, EM_DeleteFileFromList)
@@ -624,15 +625,13 @@ LRESULT CEIM02Dlg::EM_NewMsg(WPARAM wParam, LPARAM lParam)
 	return TRUE;
 }
 
-
-
 // 对方发消息过来后这这样处理
-LRESULT CEIM02Dlg::EM_CSMsg(WPARAM wParam, LPARAM lParam)
+LRESULT CEIM02Dlg::EM_CSPacket(WPARAM wParam, LPARAM lParam)
 {
 	char *pBuf = (char*)wParam;
-
-	char *szIP = (char*)lParam;
-
+	char *h = (char*)lParam;
+	int len = h[0] << 8 | h[1];
+	char* szIP = "10.10.24.37";
 	HTREEITEM hItem = _User_GetUserItem(szIP);
 	if (NULL != hItem)
 	{
@@ -644,6 +643,7 @@ LRESULT CEIM02Dlg::EM_CSMsg(WPARAM wParam, LPARAM lParam)
 		// 因为直接那样显示，Chat窗口的焦点会失去，焦点回到Main窗口.
 		// 可能是TreeCtrl 的问题
 		PostMessage(WM_EMDBLCLICKTREE, (WPARAM)pDlg, (LPARAM)2);
+
 	}
 	else
 	{
@@ -659,8 +659,8 @@ LRESULT CEIM02Dlg::EM_CSMsg(WPARAM wParam, LPARAM lParam)
 	strcat(szDir, "sounds\\");
 	strcat(szDir, "sound_1.wav");
 	PlaySound(szDir, NULL, SND_FILENAME | SND_ASYNC);*/
-
-	delete pBuf;
+	//free(pBuf);
+	// EM_HideLoading();	
 	return TRUE;
 }
 
